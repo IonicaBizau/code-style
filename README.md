@@ -50,16 +50,16 @@ constant names are written with UPPERCASE letters.
   ```js
   // Constants
   var PI = Math.PI
-  , MY_CONSTANT = 42
-  ;
+    , MY_CONSTANT = 42
+    ;
   ```
   - Node.JS
 
   ```js
   // Constants
   const PI = Math.PI
-  , MY_CONSTANT = 42
-  ;
+      , MY_CONSTANT = 42
+      ;
   ```
 
 ### Globals :earth_africa:
