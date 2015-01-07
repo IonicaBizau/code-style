@@ -1,11 +1,34 @@
-:book: Ionică Bizău's JavaScript Code Style :heart:
+:book: :bookmark_tabs: Ionică Bizău's JavaScript Code Style :books: :heart:
 ===================================================
-OK. Now you want to contribute to one of my projects I maintain. That's awesome.
-That's why I created this document that will specify my code style.
+**OK.** Now you want to contribute to one of my projects I maintain.
 
-## Variable declarations
+:heart: That's awesome. :green_heart: The content below is for you. :sunglasses:
 
-### Variables
+# Contents
+
+ - [Variable declarations](#variable-declarations)
+   - [Variables](#variables)
+   - [Constants](#constants)
+   - [Globals](#globals)
+ - [Semicolons](#semicolons)
+ - [Method and property definitions](#method-and-property-definitions)
+ - [Deleting properties](#deleting-properties)
+ - [`eval()`](#eval)
+ - [`for` loops](#for-loops)
+ - [Multiline strings](#multiline-strings)
+ - [Modifying prototypes of built-in objects](#modifying-prototypes-of-built-in-objects)
+ - [Naming things](#naming-things)
+ - [Curly braces](#curly-braces)
+ - [Array and Object Initializers](#array-and-object-initializers)
+ - [Commas](#commas)
+ - [Blank lines](#blank-lines)
+ - [Binary and Ternary operators](#binary-and-ternary-operators)
+ - [Quotes](#quotes)
+ - [Comments](#comments)
+
+## Variable declarations :pencil:
+
+### Variables :speech_balloon:
 Always with `var`.
 
 ```js
@@ -19,7 +42,7 @@ var foo = 1
   ;
 ```
 
-### Constants
+### Constants :triangular_flag_on_post:
 On the **client**, always with `var`. On the **server** with `const`. The
 constant names are written with UPPERCASE letters.
 
@@ -40,7 +63,7 @@ constant names are written with UPPERCASE letters.
   ;
   ```
 
-### Globals
+### Globals :earth_africa:
 I define globals using `window.MyGlobal` (on the client) and `global.MyGlobal`
 (on the server).
 
@@ -72,7 +95,7 @@ I define globals using `window.MyGlobal` (on the client) and `global.MyGlobal`
   MyModul.method = ...;
   ```
 
-## Semicolons
+## Semicolons :pencil2:
 Almost always. The only exception is the function declaration with
 `function <name> () {}`.
 
@@ -86,7 +109,7 @@ function bar (x) {
 }
 ```
 
-## Method and property definitions
+## Method and property definitions :paperclip:
 See the examples below.
 
 ```js
@@ -102,7 +125,7 @@ Person.prototype.getName = function () {
 };
 ```
 
-## Deleting properties
+## Deleting properties :x:
 I use the `delete` keyword.
 
 ```js
@@ -113,7 +136,7 @@ delete foo.bar;
 ```
 
 ## `eval()`
-`eval` is evil. Do not use it. However I use it in some test files and in places
+`eval` is evil. :rage: Do not use it. However I use it in some test files and in places
 where I have to execute the JavaScript code provided by the user.
 
 For converting strings to JSON, use `JSON.parse(strObj)`.
@@ -135,7 +158,7 @@ for (var i = 0; i < arr.length; ++i) {
 }
 ```
 
-## Multiline strings
+## Multiline strings :guitar:
 Use `+` operator to concatenate multiline strings:
 
 ```js
@@ -147,10 +170,10 @@ var multiLineStr = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, "
           + "\n" + "New line again...";
 ```
 
-## Modifying prototypes of built-in objects
+## Modifying prototypes of built-in objects :shit:
 Just don't, unless that's the scope of the library.
 
-## Naming things
+## Naming things :thought_balloon:
 See the examples below.
 
 ```js
@@ -188,7 +211,7 @@ var obj = {
 };
 ```
 
-## Curly braces
+## Curly braces :curly_loop:
 Open the curly brace at the end of the line. Always put the instructions between
 curly braces, even there is only one instruction.
 
@@ -201,7 +224,7 @@ if (expr) {
 }
 ```
 
-## Array and Object Initializers
+## Array and Object Initializers :file_folder:
 See examples.
 
 ```js
@@ -280,7 +303,7 @@ var c = another_long_condition_here
         ;
 ```
 
-## Quotes
+## Quotes :speech_balloon:
 Double quotes, with some exceptions when single quotes are used.
 
 ```js
@@ -288,7 +311,7 @@ var foo = "\"Hello\", he said.";
 var jQuerySelector = "div.myClass[data-foo='bar']";
 ```
 
-## Comments
+## Comments :notes:
 Put relevant comments. The comments start with uppercase letter.
 
 ```js
