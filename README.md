@@ -1,4 +1,4 @@
-:book: :bookmark_tabs: Ionică Bizău's JavaScript Code Style :books: :heart:
+:book: Ionică Bizău's JavaScript Code Style :heart:
 ===================================================
 **OK.** Now you want to contribute to one of my projects I maintain. :heart:
 That's awesome. The content below is for you. :sunglasses:
