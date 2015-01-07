@@ -24,6 +24,7 @@ On the **client**, always with `var`. On the **server** with `const`. The
 constant names are written with UPPERCASE letters.
 
   - On the client
+
   ```js
   // Constants
   var PI = Math.PI
