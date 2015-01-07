@@ -1,11 +1,11 @@
 :book: :bookmark_tabs: Ionică Bizău's JavaScript Code Style :books: :heart:
 ===================================================
-**OK.** Now you want to contribute to one of my projects I maintain.
+**OK.** Now you want to contribute to one of my projects I maintain. :heart:
+That's awesome. The content below is for you. :sunglasses:
 
-:heart: That's awesome. :green_heart: The content below is for you. :sunglasses:
+[Open issues](/code-style/issues) with any questions, ideas, fixes etc. :innocent:
 
 # Contents
-
  - [Variable declarations](#variable-declarations)
    - [Variables](#variables)
    - [Constants](#constants)
@@ -27,7 +27,6 @@
  - [Comments](#comments)
 
 ## Variable declarations :pencil:
-
 ### Variables :speech_balloon:
 Always with `var`.
 
@@ -73,8 +72,8 @@ I define globals using `window.MyGlobal` (on the client) and `global.MyGlobal`
       var MyLibrary = ...;
       window.MyLibrary = MyLibrary;
   })(window);
-  ```
 
+  ```
   - Node.JS
 
   ```js
