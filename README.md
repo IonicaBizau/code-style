@@ -318,7 +318,7 @@ function sum (a, b) {
 };
 ```
 
-I use the []`blah` tool](https://github.com/IonicaBizau/node-blah) to generate documentation.
+I use the [`blah` tool](https://github.com/IonicaBizau/node-blah) to generate documentation.
 
 ```sh
 $ npm install -g blah
