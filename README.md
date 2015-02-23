@@ -14,7 +14,7 @@ That's awesome. The content below is for you. :sunglasses:
  - [Method and property definitions](#method-and-property-definitions-paperclip)
  - [Deleting properties](#deleting-properties-x)
  - [`eval()`](#eval)
- - [`for` loops](#for-loops)
+ - [Iterating objects and arrays](#iterating-objects-and-arrays)
  - [Multiline strings](#multiline-strings-guitar)
  - [Modifying prototypes of built-in objects](#modifying-prototypes-of-built-in-objects-shit)
  - [Naming things](#naming-things-thought_balloon)
@@ -125,12 +125,18 @@ Person.prototype.getName = function () {
 ```
 
 ## Deleting properties :x:
-I use the `delete` keyword.
+I nullify the properties when that's fine:
 
 ```js
 var foo = {
     bar: 42
 };
+foo.bar = null;
+```
+
+However, I use the `delete` keyword when I want to delete them.
+
+```js
 delete foo.bar;
 ```
 
@@ -140,21 +146,34 @@ where I have to execute the JavaScript code provided by the user.
 
 For converting strings to JSON, use `JSON.parse(strObj)`.
 
-## `for` loops
-Use `for (var k in obj) {...}` for objects and
-`for (var i = 0; i < arr.length; ++i) {...}` for arrays.
+## Iterating objects and arrays
+
+For arrays, most of times, I use the `forEach` function:
 
 ```js
-for (var k in obj) {
-    ...
-}
+arr.forEach(function (c) {
+    // do something
+});
+```
 
+However, using `for` loops is fine too:
+
+```js
 for (var i = 0; i < arr.length; ++i) {
     for (var ii = 0; ii < arr[i].length; ++ii) {
         ...
     }
     ...
 }
+```
+
+For objects, I use the following style:
+
+```js
+Object.keys(obj).forEach(functions (k) {
+    var cValue = obj[k];
+    // do something
+});
 ```
 
 ## Multiline strings :guitar:
