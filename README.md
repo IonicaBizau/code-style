@@ -434,7 +434,7 @@ function LibName () {
  * @function
  * @return {Function} The callback function.
  */
-LibName.something = function (callback) {
+LibName.prototype.something = function (callback) {
     // do something
     callback(null, {...});
 };
