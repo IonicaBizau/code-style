@@ -25,6 +25,7 @@ That's awesome. The content below is for you. :sunglasses:
  - [Binary and Ternary operators](#binary-and-ternary-operators)
  - [Quotes](#quotes-speech_balloon)
  - [Comments](#comments-notes)
+ - [Project naming](#project-naming)
 
 ## Variable declarations :pencil:
 ### Variables :speech_balloon:
@@ -367,3 +368,146 @@ $ npm install -g blah
 $ blah readme
 $ blah docs some-file.js
 ```
+
+## Project naming
+I try to use short and creative names for my projects. However, there are some things
+to make a distinction between the projects:
+
+ - For Node.JS I mostly use `node-<lib-name>`
+ - For jQuery plugins I use `jQuery-<name>` or `jQuery.<name>`
+ - In other cases I just use the lib name without any preffix
+
+## Project licenses
+Most of my projects are licensed under [*The KINDLY License*](https://github.com/IonicaBizau/kindly-license).
+
+## How do I start writing a project?
+
+### Node.JS Modules
+Everything starts with a `git init`, to initialize the git repository. Then I 
+create the folder structure:
+
+```sh
+$ mkdir lib test example bin
+```
+
+Then I start writing an example (`vim example/index.js`):
+
+```js
+// Dependencies
+var LibName = require("../lib");
+
+// Do something
+LibName.something(function (err, data) {
+    console.log(err || data);
+});
+```
+
+The next thing is to write the `lib/index.js` file:
+
+```js
+// Dependencies
+var SomeDependency = require("...");
+
+// Constants
+const FOO = 42;
+
+// Configurations
+SomeDependency.defaults.something = 24;
+
+/**
+ * LibName
+ * Creates a new instance of `LibName`.
+ *
+ * @name Sum
+ * @function
+ * @return {LibName} The `LibName` instance.
+ */
+function LibName () {
+    // ...
+}
+
+/**
+ * something
+ * Does something.
+ *
+ * @name something
+ * @function
+ * @return {Function} The callback function.
+ */
+LibName.something = function (callback) {
+    // do something
+    callback(null, {...});
+};
+
+module.exports = new LibName();
+```
+
+If I have time, I probably write some tests in `test/index.js` as well.
+If it makes sense I will create a global executable (`bin/libname`):
+
+```js
+#!/usr/bin/env nodejs
+
+// Dependencies
+var LibName = require("../lib")
+  , Logger = require("bug-killer")
+  , CLP = require("clp")
+  , Package = require("../package")
+  ;
+
+// Configurations
+Logger.config.displayDate = false;
+Logger.config.logLevel = 4;
+
+// Parse the command line arguments
+var someOpt = new CLP.Option(["s", "something"], "Does something.", "value", "some default value")
+  , verboseOpt = new CLP.Option(["verbose"], "Enables the verbose mode")
+  , parser = new CLP({
+        name: "LibName"
+      , version: Package.version
+      , exe: Package.name
+      , examples: [
+            "libname # Default behavior"
+          , "libname -s 'Alice'"
+          , "libname --verbose -s 'Bob'"
+        ]
+      , docs_url: "https://github.com/IonicaBizau/node-libname"
+      , process: true
+    }, [
+        someOpt, verboseOpt
+    ])
+  ;
+
+// Enable verbose mode
+if (verboseOpt.is_provided) {
+    Logger.log("Verbose mode enabled.", "info");
+}
+
+// Do something
+LibName.foo(someOpt.value, function (err, data) {
+    if (err) { return Logger.log(err, "error"); }
+    Logger.log(data, "info");
+});
+```
+
+The next step is creating the `package.json` file (`npm init`).
+
+Creating documentation is also important:
+
+```sh
+$ kindly-license
+$ blah --gitignore -readme --contributing
+# or `blah -g -r -c`
+```
+
+Then I create the GitHub repository (`node-<libname>`) doing:
+
+```sh
+$ git remote add origin <git-url>
+$ git push --all
+$ npm publish
+```
+
+### jQuery Plugins
+
+todo
