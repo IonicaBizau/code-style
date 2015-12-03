@@ -7,11 +7,9 @@ This document contains guides that *I* defined and follow when building things.
 # Contents
 
  - [Variable declarations](#variable-declarations-pencil)
-    
      - [Variables](#variables-speech_balloon)
      - [Constants](#constants-triangular_flag_on_post)
      - [Globals](#globals-earth_africa)
-    
  - [Semicolons](#semicolons-pencil2)
  - [Method and property definitions](#method-and-property-definitions-paperclip)
  - [Deleting properties](#deleting-properties-x)
