@@ -27,10 +27,7 @@
     "description": [
       {
         "p": [
-          [
-            "**OK.** Now you want to contribute to one of my projects I maintain. :heart:",
-            "That's awesome. The content below is for you. :sunglasses:"
-          ],
+          "This document contains guides that *I* defined and follow when building things.",
           "[Open issues](/code-style/issues) with any questions, ideas, fixes etc. :innocent:"
         ]
       },
@@ -74,7 +71,7 @@
         "h3": "Variables :speech_balloon:"
       },
       {
-        "p": "Always with `var`."
+        "p": "Using `var` in general or `let` when they should be accesible only in specific blocks (e.g. `if`)."
       },
       {
         "code": {
@@ -87,7 +84,12 @@
             "var foo = 1",
             "  , bar = \"Hello World\"",
             "  , anotherOne = [{ foo: \"bar\" }]",
-            "  ;"
+            "  ;",
+            "",
+            "if (...) {",
+            "   let baz = 42;",
+            "  /* do something with baz */",
+            "}"
           ]
         }
       },
@@ -95,94 +97,36 @@
         "h3": "Constants :triangular_flag_on_post:"
       },
       {
-        "p": "On the **client**, always with `var`. On the **server** with `const`. The constant names are written with UPPERCASE letters."
+        "p": "Using `const`. The constant names are written with UPPERCASE letters. I also use `const` when including libraries using `require` and when they should not be changed. In this case, the names will not be with caps."
       },
       {
-        "ul": [
-          [
-            "On the client",
-            {
-              "code": {
-                "language": "js",
-                "content": [
-                  "// Constants",
-                  "var PI = Math.PI",
-                  "  , MY_CONSTANT = 42",
-                  "  ;"
-                ]
-              }
-            }
-          ],
-          [
-            "Node.JS",
-            {
-              "code": {
-                "language": "js",
-                "content": [
-                  "// Constants",
-                  "const PI = Math.PI",
-                  "    , MY_CONSTANT = 42",
-                  "    ;"
-                ]
-              }
-            }
-          ]
-        ]
+        {
+          "code": {
+            "language": "js",
+            "content": [
+             "// Dependencies",
+             "const http = require(\"http\")",
+             "   , fs = require(\"fs\")",
+             "   , EventEmitter = require(\"events\").EventEmitter",
+              "// Constants",
+              "const PI = Math.PI",
+              "    , MY_CONSTANT = 42",
+              "    ;"
+            ]
+          }
+        }
       },
       {
         "h3": "Globals :earth_africa:"
       },
       {
-        "p": "I define globals using `window.MyGlobal` (on the client) and `global.MyGlobal` (on the server)."
-      },
-      {
-        "ul": [
-          [
-            "Client",
-            {
-              "code": {
-                "language": "js",
-                "content": [
-                  "(function (window) {",
-                  "    var MyLibrary = ...;",
-                  "    window.MyLibrary = MyLibrary;",
-                  "})(window);"
-                ]
-              }
-            }
-          ],
-          [
-            "Node.JS",
-            {
-              "code": {
-                "language": "js",
-                "content": [
-                  "// Dependencies",
-                  "var Fs = require(\"fs\")",
-                  "  , Http = require(\"http\")",
-                  "  , Util = require(\"util\")",
-                  "  ;",
-                  "",
-                  "// Constants",
-                  "const FOO = 42;",
-                  "",
-                  "// Define some global",
-                  "global.someGlobal = Math.PI;",
-                  "",
-                  "// Constructor",
-                  "var MyModule = module.exports = {};",
-                  "MyModul.method = ...;"
-                ]
-              }
-            }
-          ]
-        ]
+        "p": "I define globals when there is no commonjs environment (this is actually handled by [`dist-it`](https://github.com/IonicaBizau/dist-it). When I manually define globals, I do that using `window.MyGlobal` (on the client) and `global.MyGlobal` (on the server)."
       },
       {
         "h2": "Semicolons :pencil2:"
       },
       {
-        "p": "Almost always. The only exception is the function declaration with `function <name> () {}`."
+        "p": "I *use* semicolons. Almost always."
       },
       {
         "code": {
@@ -194,6 +138,9 @@
             "        console.log(m);",
             "    };",
             "    return { y: x };",
+            "}",
+            "class Foo {",
+            "    ...",
             "}"
           ]
         }
@@ -202,22 +149,21 @@
         "h2": "Method and property definitions :paperclip:"
       },
       {
-        "p": "See the examples below."
+        "p": "I use the ES6 `class` for creating classes."
       },
       {
         "code": {
           "language": "js",
           "content": [
-            "function Person (name, age) {",
-            "    this.name = name;",
-            "    this.age = age;",
-            "    this.doSomething = function () {",
-            "        ...",
-            "    };",
-            "}",
-            "Person.prototype.getName = function () {",
-            "    return this.name;",
-            "};"
+            "class Person {",
+            "    constructor (name, age) {",
+            "        this.name = name;",
+            "        this.age = age;",
+            "    }",
+            "    getName () {",
+            "        return this.name;",
+            "    }",
+            "}"
           ]
         }
       },
@@ -239,7 +185,7 @@
         }
       },
       {
-        "p": "However, I use the `delete` keyword when I want to delete them."
+        "p": "However, I use the `delete` keyword when I really want to delete them."
       },
       {
         "code": {
@@ -305,21 +251,34 @@
         }
       },
       {
-        "h2": "Multiline strings :guitar:"
-      },
-      {
-        "p": "Use `+` operator to concatenate multiline strings:"
+        "p": "To simplify this, I created [`iterate-object`](https://github.com/IonicaBizau/iterate-object), which abstracts this functionality:"
       },
       {
         "code": {
           "language": "js",
           "content": [
-            "var multiLineStr = \"Lorem ipsum dolor sit amet, consectetur adipisicing elit, \"",
-            "                 + \"sed do eiusmod tempor incididunt ut labore et dolore magna \"",
-            "                 + \"aliqua. Ut enim ad minim veniam, quis nostrud exercitation \"",
-            "                 + \"ullamco laboris nisi ut aliquip ex ea commodo consequat\"",
-            "          + \"\\n\" + \"New line paragrph...\"",
-            "          + \"\\n\" + \"New line again...\";"
+            "const iterateObject = require(\"iterate-object\");",
+            "iterateObject(obj, functions (value, key) {",
+            "    // do something",
+            "});"
+          ]
+        }
+      },
+      {
+        "h2": "Multiline strings :guitar:"
+      },
+      {
+        "p": "I use backticks to create multiline strings:"
+      },
+      {
+        "code": {
+          "language": "js",
+          "content": [
+            "var multiLineStr = `Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+            "sed do eiusmod tempor incididunt ut labore et dolore magna",
+            "aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
+            "ullamco laboris nisi ut aliquip ex ea commodo consequat",
+            "New line again...`;"
           ]
         }
       },
@@ -333,29 +292,17 @@
         "h2": "Naming things :thought_balloon:"
       },
       {
-        "p": "See the examples below."
+        "p": "Using camel case notation for variables, in general. For constructors I capitalize the variable name (e.g. `EventEmitter`)."
       },
       {
         "code": {
           "language": "js",
           "content": [
             "// Node.JS require",
-            "var SomeLibrary = require(\"somelibrary\");",
-            "",
-            "// Defining the library name",
-            "/// Node.JS",
-            "var MyAwesomeModule = module.exports = ...;",
-            "/// Client",
-            "(function (window) {",
-            "    var MyAwesomeModule = ...;",
-            "    window.MyAwesomeModule = MyAwesomeModule;",
-            "})(window);",
-            "",
-            "// Constants",
-            "/// Node.JS",
-            "const SOME_CONSTANT = 42;",
-            "/// Client",
-            "var SOME_CONSTANT = 42;",
+            "const fs = require(\"fs\");",
+            "    , events = require(\"events\")",
+            "    , EventEmitter = events.EventEmitter",
+            "    ;",
             "",
             "// Local variables",
             "var x = 1",
@@ -364,13 +311,23 @@
             "",
             "// Functions",
             "function fooBar () {...}",
-            "obj.methodA = function () {...}",
             "",
+            "// Classes",
+            "class Person {",
+            "    constructor (name, age) {",
+            "        this.name = name;",
+            "        this.age = age;",
+            "    }",
+            "    getName () {",
+            "        return this.name;",
+            "    }",
+            "}",
             "// Object fields",
             "var obj = {",
             "    full_name: \"Johnny B.\"",
-            "  , age: 19",
-            "};"
+            "  , age: 20",
+            "};",
+            "obj.methodA = function () {...}"
           ]
         }
       },
@@ -424,7 +381,7 @@
             "",
             "var obj1 = {",
             "    full_name: \"Johnny B.\"",
-            "  , age: 19",
+            "  , age: 20",
             "};"
           ]
         }
@@ -527,9 +484,9 @@
           "language": "js",
           "content": [
             "// Dependencies",
-            "var Lib1 = require(\"lib1\")",
-            "  , Lib2 = require(\"lib2\")",
-            "  ;",
+            "const lib1 = require(\"lib1\")",
+            "    , lib2 = require(\"lib2\")",
+            "    ;",
             "",
             "// Constants",
             "const FOURTY_TWO = 42;"
@@ -560,15 +517,15 @@
         }
       },
       {
-        "p": "I use the [`blah` tool](https://github.com/IonicaBizau/node-blah) to generate documentation."
+        "p": "I use the [`blah` tool](https://github.com/IonicaBizau/blah) to generate documentation."
       },
       {
         "code": {
           "language": "sh",
           "content": [
             "$ npm install -g blah",
-            "$ blah readme",
-            "$ blah docs some-file.js"
+            "$ blah --readme",
+            "$ blah --docs some-file.js"
           ]
         }
       },
@@ -576,20 +533,13 @@
         "h2": "Project naming"
       },
       {
-        "p": "I try to use short and creative names for my projects. However, there are some things to make a distinction between the projects:"
-      },
-      {
-        "ul": [
-          "For Node.JS I mostly use `node-<lib-name>`",
-          "For jQuery plugins I use `jQuery-<name>` or `jQuery.<name>`",
-          "In other cases I just use the lib name without any preffix"
-        ]
+        "p": "I use [`name-it`](https://github.com/IonicaBizau/name-it) to generate project names."
       },
       {
         "h2": "Project licenses"
       },
       {
-        "p": "Most of my projects are licensed under [*The KINDLY License*](https://github.com/IonicaBizau/kindly-license)."
+        "p": "I :sparkling_heart: open-source! I prefer the MIT license."
       },
       {
         "h2": "How do I start writing a project?"
