@@ -1,15 +1,20 @@
-:book: Ionică Bizău's JavaScript Code Style :heart:
-===================================================
+# :book: Ionică Bizău's Code Style :heart: [![Support this project][donate-now]][paypal-donations]
+
+Or how I build things.
+
 **OK.** Now you want to contribute to one of my projects I maintain. :heart:
 That's awesome. The content below is for you. :sunglasses:
 
 [Open issues](/code-style/issues) with any questions, ideas, fixes etc. :innocent:
 
 # Contents
+
  - [Variable declarations](#variable-declarations-pencil)
-   - [Variables](#variables-speech_balloon)
-   - [Constants](#constants-triangular_flag_on_post)
-   - [Globals](#globals-earth_africa)
+    
+     - [Variables](#variables-speech_balloon)
+     - [Constants](#constants-triangular_flag_on_post)
+     - [Globals](#globals-earth_africa)
+    
  - [Semicolons](#semicolons-pencil2)
  - [Method and property definitions](#method-and-property-definitions-paperclip)
  - [Deleting properties](#deleting-properties-x)
@@ -29,6 +34,7 @@ That's awesome. The content below is for you. :sunglasses:
 
 ## Variable declarations :pencil:
 ### Variables :speech_balloon:
+
 Always with `var`.
 
 ```js
@@ -41,63 +47,58 @@ var foo = 1
   , anotherOne = [{ foo: "bar" }]
   ;
 ```
-
 ### Constants :triangular_flag_on_post:
-On the **client**, always with `var`. On the **server** with `const`. The
-constant names are written with UPPERCASE letters.
 
-  - On the client
+On the **client**, always with `var`. On the **server** with `const`. The constant names are written with UPPERCASE letters.
 
-  ```js
-  // Constants
-  var PI = Math.PI
-    , MY_CONSTANT = 42
-    ;
-  ```
-  - Node.JS
-
-  ```js
-  // Constants
-  const PI = Math.PI
+ - On the client
+    ```js
+    // Constants
+    var PI = Math.PI
       , MY_CONSTANT = 42
       ;
-  ```
+    ```
+ - Node.JS
+    ```js
+    // Constants
+    const PI = Math.PI
+        , MY_CONSTANT = 42
+        ;
+    ```
 
 ### Globals :earth_africa:
-I define globals using `window.MyGlobal` (on the client) and `global.MyGlobal`
-(on the server).
 
-  - Client
-  ```js
-  (function (window) {
-      var MyLibrary = ...;
-      window.MyLibrary = MyLibrary;
-  })(window);
+I define globals using `window.MyGlobal` (on the client) and `global.MyGlobal` (on the server).
 
-  ```
-  - Node.JS
-
-  ```js
-  // Dependencies
-  var Fs = require("fs")
-    , Http = require("http")
-    , Util = require("util")
-    ;
-
-  // Constants
-  const FOO = 42;
-
-  // Define some global
-  global.someGlobal = Math.PI;
-
-  // Constructor
-  var MyModule = module.exports = {};
-  MyModul.method = ...;
-  ```
+ - Client
+    ```js
+    (function (window) {
+        var MyLibrary = ...;
+        window.MyLibrary = MyLibrary;
+    })(window);
+    ```
+ - Node.JS
+    ```js
+    // Dependencies
+    var Fs = require("fs")
+      , Http = require("http")
+      , Util = require("util")
+      ;
+    
+    // Constants
+    const FOO = 42;
+    
+    // Define some global
+    global.someGlobal = Math.PI;
+    
+    // Constructor
+    var MyModule = module.exports = {};
+    MyModul.method = ...;
+    ```
 
 ## Semicolons :pencil2:
-Almost always. The only exception is the function declaration with
-`function <name> () {}`.
+
+Almost always. The only exception is the function declaration with `function <name> () {}`.
 
 ```js
 var foo = 1;
@@ -108,8 +109,8 @@ function bar (x) {
     return { y: x };
 }
 ```
-
 ## Method and property definitions :paperclip:
+
 See the examples below.
 
 ```js
@@ -124,8 +125,8 @@ Person.prototype.getName = function () {
     return this.name;
 };
 ```
-
 ## Deleting properties :x:
+
 I nullify the properties when that's fine:
 
 ```js
@@ -140,10 +141,9 @@ However, I use the `delete` keyword when I want to delete them.
 ```js
 delete foo.bar;
 ```
-
 ## `eval()`
-`eval` is evil. :rage: Do not use it. However I use it in some test files and in places
-where I have to execute the JavaScript code provided by the user.
+
+`eval` is evil. :rage: Do not use it. However I use it in some test files and in places where I have to execute the JavaScript code provided by the user.
 
 For converting strings to JSON, use `JSON.parse(strObj)`.
 
@@ -176,8 +176,8 @@ Object.keys(obj).forEach(functions (k) {
     // do something
 });
 ```
-
 ## Multiline strings :guitar:
+
 Use `+` operator to concatenate multiline strings:
 
 ```js
@@ -188,11 +188,12 @@ var multiLineStr = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, "
           + "\n" + "New line paragrph..."
           + "\n" + "New line again...";
 ```
-
 ## Modifying prototypes of built-in objects :shit:
+
 Just don't, unless that's the scope of the library.
 
 ## Naming things :thought_balloon:
+
 See the examples below.
 
 ```js
@@ -229,10 +230,9 @@ var obj = {
   , age: 19
 };
 ```
-
 ## Curly braces :curly_loop:
-Open the curly brace at the end of the line. Always put the instructions between
-curly braces, even there is only one instruction.
+
+Open the curly brace at the end of the line. Always put the instructions between curly braces, even there is only one instruction.
 
 ```js
 if (expr) {
@@ -242,8 +242,8 @@ if (expr) {
     instr3;
 }
 ```
-
 ## Array and Object Initializers :file_folder:
+
 See examples.
 
 ```js
@@ -272,6 +272,7 @@ var obj1 = {
 };
 ```
 ## Commas
+
 Put commas at the beginning of the line, not at the end.
 
 ```js
@@ -288,8 +289,8 @@ var obj = {
   , y: 2
 };
 ```
-
 ## Blank lines
+
 Group the instructions inserting some blank lines where it's needed.
 
 ```js
@@ -299,8 +300,8 @@ bar(x);
 foo(y);
 bar(y);
 ```
-
 ## Binary and Ternary operators
+
 See examples.
 
 ```js
@@ -321,16 +322,16 @@ var c = another_long_condition_here
         : or_another_some_long_value
         ;
 ```
-
 ## Quotes :speech_balloon:
+
 Double quotes, with some exceptions when single quotes are used.
 
 ```js
 var foo = "\"Hello\", he said.";
 var jQuerySelector = "div.myClass[data-foo='bar']";
 ```
-
 ## Comments :notes:
+
 Put relevant comments. The comments start with uppercase letter.
 
 ```js
@@ -368,23 +369,22 @@ $ npm install -g blah
 $ blah readme
 $ blah docs some-file.js
 ```
-
 ## Project naming
-I try to use short and creative names for my projects. However, there are some things
-to make a distinction between the projects:
+
+I try to use short and creative names for my projects. However, there are some things to make a distinction between the projects:
 
  - For Node.JS I mostly use `node-<lib-name>`
  - For jQuery plugins I use `jQuery-<name>` or `jQuery.<name>`
  - In other cases I just use the lib name without any preffix
 
 ## Project licenses
+
 Most of my projects are licensed under [*The KINDLY License*](https://github.com/IonicaBizau/kindly-license).
 
 ## How do I start writing a project?
-
 ### Node.JS Modules
-Everything starts with a `git init`, to initialize the git repository. Then I 
-create the folder structure:
+
+Everything starts with a `git init`, to initialize the git repository. Then I create the folder structure:
 
 ```sh
 $ mkdir lib test example bin
@@ -443,6 +443,7 @@ module.exports = new LibName();
 ```
 
 If I have time, I probably write some tests in `test/index.js` as well.
+
 If it makes sense I will create a global executable (`bin/libname`):
 
 ```js
@@ -507,7 +508,21 @@ $ git remote add origin <git-url>
 $ git push --all
 $ npm publish
 ```
-
 ### jQuery Plugins
 
 todo
+
+## How to contribute
+Have an idea? Found a bug? See [how to contribute][contributing].
+
+## License
+
+[MIT][license] © [Ionică Bizău][website]
+
+[paypal-donations]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RVXDDLKKLQRJW
+[donate-now]: http://i.imgur.com/6cMbHOC.png
+
+[license]: http://showalicense.com/?fullname=Ionic%C4%83%20Biz%C4%83u%20%3Cbizauionica%40gmail.com%3E%20(http%3A%2F%2Fionicabizau.net)&year=2015#license-mit
+[website]: http://ionicabizau.net
+[contributing]: /CONTRIBUTING.md
+[docs]: /DOCUMENTATION.md
