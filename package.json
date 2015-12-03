@@ -100,20 +100,18 @@
         "p": "Using `const`. The constant names are written with UPPERCASE letters. I also use `const` when including libraries using `require` and when they should not be changed. In this case, the names will not be with caps."
       },
       {
-        {
-          "code": {
-            "language": "js",
-            "content": [
-             "// Dependencies",
-             "const http = require(\"http\")",
-             "   , fs = require(\"fs\")",
-             "   , EventEmitter = require(\"events\").EventEmitter",
-              "// Constants",
-              "const PI = Math.PI",
-              "    , MY_CONSTANT = 42",
-              "    ;"
-            ]
-          }
+        "code": {
+          "language": "js",
+          "content": [
+            "// Dependencies",
+            "const http = require(\"http\")",
+            "   , fs = require(\"fs\")",
+            "   , EventEmitter = require(\"events\").EventEmitter",
+            "// Constants",
+            "const PI = Math.PI",
+            "    , MY_CONSTANT = 42",
+            "    ;"
+          ]
         }
       },
       {
@@ -134,10 +132,10 @@
           "content": [
             "var foo = 1;",
             "function bar (x) {",
-            "    this.method = function (m) {",
+            "    var someMethod = function (m) {",
             "        console.log(m);",
             "    };",
-            "    return { y: x };",
+            "    return { y: x, foo: someMethod };",
             "}",
             "class Foo {",
             "    ...",
@@ -214,7 +212,7 @@
         "code": {
           "language": "js",
           "content": [
-            "arr.forEach(function (c) {",
+            "arr.forEach(c => {",
             "    // do something",
             "});"
           ]
@@ -243,7 +241,7 @@
         "code": {
           "language": "js",
           "content": [
-            "Object.keys(obj).forEach(functions (k) {",
+            "Object.keys(obj).forEach(k => {",
             "    var cValue = obj[k];",
             "    // do something",
             "});"
@@ -258,7 +256,7 @@
           "language": "js",
           "content": [
             "const iterateObject = require(\"iterate-object\");",
-            "iterateObject(obj, functions (value, key) {",
+            "iterateObject(obj, (value, key) => {",
             "    // do something",
             "});"
           ]
@@ -327,7 +325,7 @@
             "    full_name: \"Johnny B.\"",
             "  , age: 20",
             "};",
-            "obj.methodA = function () {...}"
+            "obj.methodA = function () {...};"
           ]
         }
       },
@@ -540,175 +538,6 @@
       },
       {
         "p": "I :sparkling_heart: open-source! I prefer the MIT license."
-      },
-      {
-        "h2": "How do I start writing a project?"
-      },
-      {
-        "h3": "Node.JS Modules"
-      },
-      {
-        "p": "Everything starts with a `git init`, to initialize the git repository. Then I create the folder structure:"
-      },
-      {
-        "code": {
-          "language": "sh",
-          "content": [
-            "$ mkdir lib test example bin"
-          ]
-        }
-      },
-      {
-        "p": "Then I start writing an example (`vim example/index.js`):"
-      },
-      {
-        "code": {
-          "language": "js",
-          "content": [
-            "// Dependencies",
-            "var LibName = require(\"../lib\");",
-            "",
-            "// Do something",
-            "LibName.something(function (err, data) {",
-            "    console.log(err || data);",
-            "});"
-          ]
-        }
-      },
-      {
-        "p": "The next thing is to write the `lib/index.js` file:"
-      },
-      {
-        "code": {
-          "language": "js",
-          "content": [
-            "// Dependencies",
-            "var SomeDependency = require(\"...\");",
-            "",
-            "// Constants",
-            "const FOO = 42;",
-            "",
-            "// Configurations",
-            "SomeDependency.defaults.something = 24;",
-            "",
-            "/**",
-            " * LibName",
-            " * Creates a new instance of `LibName`.",
-            " *",
-            " * @name Sum",
-            " * @function",
-            " * @return {LibName} The `LibName` instance.",
-            " */",
-            "function LibName () {",
-            "    // ...",
-            "}",
-            "",
-            "/**",
-            " * something",
-            " * Does something.",
-            " *",
-            " * @name something",
-            " * @function",
-            " * @return {Function} The callback function.",
-            " */",
-            "LibName.prototype.something = function (callback) {",
-            "    // do something",
-            "    callback(null, {...});",
-            "};",
-            "",
-            "module.exports = new LibName();"
-          ]
-        }
-      },
-      {
-        "p": "If I have time, I probably write some tests in `test/index.js` as well."
-      },
-      {
-        "p": "If it makes sense I will create a global executable (`bin/libname`):"
-      },
-      {
-        "code": {
-          "language": "js",
-          "content": [
-            "#!/usr/bin/env nodejs",
-            "",
-            "// Dependencies",
-            "var LibName = require(\"../lib\")",
-            "  , Logger = require(\"bug-killer\")",
-            "  , CLP = require(\"clp\")",
-            "  , Package = require(\"../package\")",
-            "  ;",
-            "",
-            "// Configurations",
-            "Logger.config.displayDate = false;",
-            "Logger.config.logLevel = 4;",
-            "",
-            "// Parse the command line arguments",
-            "var someOpt = new CLP.Option([\"s\", \"something\"], \"Does something.\", \"value\", \"some default value\")",
-            "  , verboseOpt = new CLP.Option([\"verbose\"], \"Enables the verbose mode\")",
-            "  , parser = new CLP({",
-            "        name: \"LibName\"",
-            "      , version: Package.version",
-            "      , exe: Package.name",
-            "      , examples: [",
-            "            \"libname # Default behavior\"",
-            "          , \"libname -s 'Alice'\"",
-            "          , \"libname --verbose -s 'Bob'\"",
-            "        ]",
-            "      , docs_url: \"https://github.com/IonicaBizau/node-libname\"",
-            "      , process: true",
-            "    }, [",
-            "        someOpt, verboseOpt",
-            "    ])",
-            "  ;",
-            "",
-            "// Enable verbose mode",
-            "if (verboseOpt.is_provided) {",
-            "    Logger.log(\"Verbose mode enabled.\", \"info\");",
-            "}",
-            "",
-            "// Do something",
-            "LibName.foo(someOpt.value, function (err, data) {",
-            "    if (err) { return Logger.log(err, \"error\"); }",
-            "    Logger.log(data, \"info\");",
-            "});"
-          ]
-        }
-      },
-      {
-        "p": "The next step is creating the `package.json` file (`npm init`)."
-      },
-      {
-        "p": "Creating documentation is also important:"
-      },
-      {
-        "code": {
-          "language": "sh",
-          "content": [
-            "$ kindly-license",
-            "$ blah --gitignore -readme --contributing",
-            "# or `blah -g -r -c`"
-          ]
-        }
-      },
-      {
-        "p": "Then I create the GitHub repository (`node-<libname>`) doing:"
-      },
-      {
-        "code": {
-          "language": "sh",
-          "content": [
-            "$ git remote add origin <git-url>",
-            "$ git push --all",
-            "$ npm publish"
-          ]
-        }
-      },
-      {
-        "h3": "jQuery Plugins"
-      },
-      {
-        "p": "todo"
       }
     ]
   }

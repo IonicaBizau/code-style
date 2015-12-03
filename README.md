@@ -1,9 +1,6 @@
 # :book: Ionică Bizău's Code Style :heart: [![Support this project][donate-now]][paypal-donations]
 
-Or how I build things.
-
-**OK.** Now you want to contribute to one of my projects I maintain. :heart:
-That's awesome. The content below is for you. :sunglasses:
+This document contains guides that *I* defined and follow when building things.
 
 [Open issues](/code-style/issues) with any questions, ideas, fixes etc. :innocent:
 
@@ -35,7 +32,7 @@ That's awesome. The content below is for you. :sunglasses:
 ## Variable declarations :pencil:
 ### Variables :speech_balloon:
 
-Always with `var`.
+Using `var` in general or `let` when they should be accesible only in specific blocks (e.g. `if`).
 
 ```js
 // One declaration
@@ -46,84 +43,60 @@ var foo = 1
   , bar = "Hello World"
   , anotherOne = [{ foo: "bar" }]
   ;
+
+if (...) {
+   let baz = 42;
+  /* do something with baz */
+}
 ```
 ### Constants :triangular_flag_on_post:
 
-On the **client**, always with `var`. On the **server** with `const`. The constant names are written with UPPERCASE letters.
+Using `const`. The constant names are written with UPPERCASE letters. I also use `const` when including libraries using `require` and when they should not be changed. In this case, the names will not be with caps.
 
- - On the client
-    ```js
-    // Constants
-    var PI = Math.PI
-      , MY_CONSTANT = 42
-      ;
-    ```
- - Node.JS
-    ```js
-    // Constants
-    const PI = Math.PI
-        , MY_CONSTANT = 42
-        ;
-    ```
-
+```js
+// Dependencies
+const http = require("http")
+   , fs = require("fs")
+   , EventEmitter = require("events").EventEmitter
+// Constants
+const PI = Math.PI
+    , MY_CONSTANT = 42
+    ;
+```
 ### Globals :earth_africa:
 
-I define globals using `window.MyGlobal` (on the client) and `global.MyGlobal` (on the server).
-
- - Client
-    ```js
-    (function (window) {
-        var MyLibrary = ...;
-        window.MyLibrary = MyLibrary;
-    })(window);
-    ```
- - Node.JS
-    ```js
-    // Dependencies
-    var Fs = require("fs")
-      , Http = require("http")
-      , Util = require("util")
-      ;
-    
-    // Constants
-    const FOO = 42;
-    
-    // Define some global
-    global.someGlobal = Math.PI;
-    
-    // Constructor
-    var MyModule = module.exports = {};
-    MyModul.method = ...;
-    ```
+I define globals when there is no commonjs environment (this is actually handled by [`dist-it`](https://github.com/IonicaBizau/dist-it). When I manually define globals, I do that using `window.MyGlobal` (on the client) and `global.MyGlobal` (on the server).
 
 ## Semicolons :pencil2:
 
-Almost always. The only exception is the function declaration with `function <name> () {}`.
+I *use* semicolons. Almost always.
 
 ```js
 var foo = 1;
 function bar (x) {
-    this.method = function (m) {
+    var someMethod = function (m) {
         console.log(m);
     };
-    return { y: x };
+    return { y: x, foo: someMethod };
+}
+class Foo {
+    ...
 }
 ```
 ## Method and property definitions :paperclip:
 
-See the examples below.
+I use the ES6 `class` for creating classes.
 
 ```js
-function Person (name, age) {
-    this.name = name;
-    this.age = age;
-    this.doSomething = function () {
-        ...
-    };
+class Person {
+    constructor (name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    getName () {
+        return this.name;
+    }
 }
-Person.prototype.getName = function () {
-    return this.name;
-};
 ```
 ## Deleting properties :x:
 
@@ -136,7 +109,7 @@ var foo = {
 foo.bar = null;
 ```
 
-However, I use the `delete` keyword when I want to delete them.
+However, I use the `delete` keyword when I really want to delete them.
 
 ```js
 delete foo.bar;
@@ -152,7 +125,7 @@ For converting strings to JSON, use `JSON.parse(strObj)`.
 For arrays, most of times, I use the `forEach` function:
 
 ```js
-arr.forEach(function (c) {
+arr.forEach(c => {
     // do something
 });
 ```
@@ -171,22 +144,30 @@ for (var i = 0; i < arr.length; ++i) {
 For objects, I use the following style:
 
 ```js
-Object.keys(obj).forEach(functions (k) {
+Object.keys(obj).forEach(k => {
     var cValue = obj[k];
+    // do something
+});
+```
+
+To simplify this, I created [`iterate-object`](https://github.com/IonicaBizau/iterate-object), which abstracts this functionality:
+
+```js
+const iterateObject = require("iterate-object");
+iterateObject(obj, (value, key) => {
     // do something
 });
 ```
 ## Multiline strings :guitar:
 
-Use `+` operator to concatenate multiline strings:
+I use backticks to create multiline strings:
 
 ```js
-var multiLineStr = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, "
-                 + "sed do eiusmod tempor incididunt ut labore et dolore magna "
-                 + "aliqua. Ut enim ad minim veniam, quis nostrud exercitation "
-                 + "ullamco laboris nisi ut aliquip ex ea commodo consequat"
-          + "\n" + "New line paragrph..."
-          + "\n" + "New line again...";
+var multiLineStr = `Lorem ipsum dolor sit amet, consectetur adipisicing elit
+sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+ullamco laboris nisi ut aliquip ex ea commodo consequat
+New line again...`;
 ```
 ## Modifying prototypes of built-in objects :shit:
 
@@ -194,26 +175,14 @@ Just don't, unless that's the scope of the library.
 
 ## Naming things :thought_balloon:
 
-See the examples below.
+Using camel case notation for variables, in general. For constructors I capitalize the variable name (e.g. `EventEmitter`).
 
 ```js
 // Node.JS require
-var SomeLibrary = require("somelibrary");
-
-// Defining the library name
-/// Node.JS
-var MyAwesomeModule = module.exports = ...;
-/// Client
-(function (window) {
-    var MyAwesomeModule = ...;
-    window.MyAwesomeModule = MyAwesomeModule;
-})(window);
-
-// Constants
-/// Node.JS
-const SOME_CONSTANT = 42;
-/// Client
-var SOME_CONSTANT = 42;
+const fs = require("fs");
+    , events = require("events")
+    , EventEmitter = events.EventEmitter
+    ;
 
 // Local variables
 var x = 1
@@ -222,13 +191,23 @@ var x = 1
 
 // Functions
 function fooBar () {...}
-obj.methodA = function () {...}
 
+// Classes
+class Person {
+    constructor (name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    getName () {
+        return this.name;
+    }
+}
 // Object fields
 var obj = {
     full_name: "Johnny B."
-  , age: 19
+  , age: 20
 };
+obj.methodA = function () {...};
 ```
 ## Curly braces :curly_loop:
 
@@ -268,7 +247,7 @@ var obj = { a: 1 };
 
 var obj1 = {
     full_name: "Johnny B."
-  , age: 19
+  , age: 20
 };
 ```
 ## Commas
@@ -336,9 +315,9 @@ Put relevant comments. The comments start with uppercase letter.
 
 ```js
 // Dependencies
-var Lib1 = require("lib1")
-  , Lib2 = require("lib2")
-  ;
+const lib1 = require("lib1")
+    , lib2 = require("lib2")
+    ;
 
 // Constants
 const FOURTY_TWO = 42;
@@ -362,155 +341,20 @@ function sum (a, b) {
 };
 ```
 
-I use the [`blah` tool](https://github.com/IonicaBizau/node-blah) to generate documentation.
+I use the [`blah` tool](https://github.com/IonicaBizau/blah) to generate documentation.
 
 ```sh
 $ npm install -g blah
-$ blah readme
-$ blah docs some-file.js
+$ blah --readme
+$ blah --docs some-file.js
 ```
 ## Project naming
 
-I try to use short and creative names for my projects. However, there are some things to make a distinction between the projects:
-
- - For Node.JS I mostly use `node-<lib-name>`
- - For jQuery plugins I use `jQuery-<name>` or `jQuery.<name>`
- - In other cases I just use the lib name without any preffix
+I use [`name-it`](https://github.com/IonicaBizau/name-it) to generate project names.
 
 ## Project licenses
 
-Most of my projects are licensed under [*The KINDLY License*](https://github.com/IonicaBizau/kindly-license).
-
-## How do I start writing a project?
-### Node.JS Modules
-
-Everything starts with a `git init`, to initialize the git repository. Then I create the folder structure:
-
-```sh
-$ mkdir lib test example bin
-```
-
-Then I start writing an example (`vim example/index.js`):
-
-```js
-// Dependencies
-var LibName = require("../lib");
-
-// Do something
-LibName.something(function (err, data) {
-    console.log(err || data);
-});
-```
-
-The next thing is to write the `lib/index.js` file:
-
-```js
-// Dependencies
-var SomeDependency = require("...");
-
-// Constants
-const FOO = 42;
-
-// Configurations
-SomeDependency.defaults.something = 24;
-
-/**
- * LibName
- * Creates a new instance of `LibName`.
- *
- * @name Sum
- * @function
- * @return {LibName} The `LibName` instance.
- */
-function LibName () {
-    // ...
-}
-
-/**
- * something
- * Does something.
- *
- * @name something
- * @function
- * @return {Function} The callback function.
- */
-LibName.prototype.something = function (callback) {
-    // do something
-    callback(null, {...});
-};
-
-module.exports = new LibName();
-```
-
-If I have time, I probably write some tests in `test/index.js` as well.
-
-If it makes sense I will create a global executable (`bin/libname`):
-
-```js
-#!/usr/bin/env nodejs
-
-// Dependencies
-var LibName = require("../lib")
-  , Logger = require("bug-killer")
-  , CLP = require("clp")
-  , Package = require("../package")
-  ;
-
-// Configurations
-Logger.config.displayDate = false;
-Logger.config.logLevel = 4;
-
-// Parse the command line arguments
-var someOpt = new CLP.Option(["s", "something"], "Does something.", "value", "some default value")
-  , verboseOpt = new CLP.Option(["verbose"], "Enables the verbose mode")
-  , parser = new CLP({
-        name: "LibName"
-      , version: Package.version
-      , exe: Package.name
-      , examples: [
-            "libname # Default behavior"
-          , "libname -s 'Alice'"
-          , "libname --verbose -s 'Bob'"
-        ]
-      , docs_url: "https://github.com/IonicaBizau/node-libname"
-      , process: true
-    }, [
-        someOpt, verboseOpt
-    ])
-  ;
-
-// Enable verbose mode
-if (verboseOpt.is_provided) {
-    Logger.log("Verbose mode enabled.", "info");
-}
-
-// Do something
-LibName.foo(someOpt.value, function (err, data) {
-    if (err) { return Logger.log(err, "error"); }
-    Logger.log(data, "info");
-});
-```
-
-The next step is creating the `package.json` file (`npm init`).
-
-Creating documentation is also important:
-
-```sh
-$ kindly-license
-$ blah --gitignore -readme --contributing
-# or `blah -g -r -c`
-```
-
-Then I create the GitHub repository (`node-<libname>`) doing:
-
-```sh
-$ git remote add origin <git-url>
-$ git push --all
-$ npm publish
-```
-### jQuery Plugins
-
-todo
+I :sparkling_heart: open-source! I prefer the MIT license.
 
 ## How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].
