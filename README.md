@@ -1,4 +1,4 @@
-# :book: Ionică Bizău's Code Style :heart: [![Support this project][donate-now]][paypal-donations]
+# :book: Ionică Bizău's Code Style :heart: [![PayPal](https://img.shields.io/badge/%24-paypal-f39c12.svg)][paypal-donations] [![Version](https://img.shields.io/npm/v/ionicabizau-code-style.svg)](https://www.npmjs.com/package/ionicabizau-code-style) [![Downloads](https://img.shields.io/npm/dt/ionicabizau-code-style.svg)](https://www.npmjs.com/package/ionicabizau-code-style) [![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/johnnyb?utm_source=github&utm_medium=button&utm_term=johnnyb&utm_campaign=github)
 
 This document contains guides that *I* defined and follow when building things.
 
@@ -7,9 +7,11 @@ This document contains guides that *I* defined and follow when building things.
 # Contents
 
  - [Variable declarations](#variable-declarations-pencil)
+    
      - [Variables](#variables-speech_balloon)
      - [Constants](#constants-triangular_flag_on_post)
      - [Globals](#globals-earth_africa)
+    
  - [Semicolons](#semicolons-pencil2)
  - [Method and property definitions](#method-and-property-definitions-paperclip)
  - [Deleting properties](#deleting-properties-x)
