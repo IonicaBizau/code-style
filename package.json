@@ -297,7 +297,7 @@
           "language": "js",
           "content": [
             "// Node.JS require",
-            "const fs = require(\"fs\");",
+            "const fs = require(\"fs\")",
             "    , events = require(\"events\")",
             "    , EventEmitter = events.EventEmitter",
             "    ;",
