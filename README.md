@@ -179,7 +179,7 @@ Using camel case notation for variables, in general. For constructors I capitali
 
 ```js
 // Node.JS require
-const fs = require("fs");
+const fs = require("fs")
     , events = require("events")
     , EventEmitter = events.EventEmitter
     ;
