@@ -1,8 +1,8 @@
 {
   "name": "ionicabizau-code-style",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Or how I build things.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -540,5 +540,16 @@
         "p": "I :sparkling_heart: open-source! I prefer the MIT license."
       }
     ]
-  }
+  },
+  "files": [
+    "bin/",
+    "app/",
+    "lib/",
+    "dist/",
+    "src/",
+    "resources/",
+    "menu/",
+    "cli.js",
+    "index.js"
+  ]
 }

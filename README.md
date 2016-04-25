@@ -1,4 +1,6 @@
+
 # :book: Ionică Bizău's Code Style :heart: [![PayPal](https://img.shields.io/badge/%24-paypal-f39c12.svg)][paypal-donations] [![Version](https://img.shields.io/npm/v/ionicabizau-code-style.svg)](https://www.npmjs.com/package/ionicabizau-code-style) [![Downloads](https://img.shields.io/npm/dt/ionicabizau-code-style.svg)](https://www.npmjs.com/package/ionicabizau-code-style) [![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/johnnyb?utm_source=github&utm_medium=button&utm_term=johnnyb&utm_campaign=github)
+
 
 This document contains guides that *I* defined and follow when building things.
 
@@ -7,11 +9,11 @@ This document contains guides that *I* defined and follow when building things.
 # Contents
 
  - [Variable declarations](#variable-declarations-pencil)
-    
+
      - [Variables](#variables-speech_balloon)
      - [Constants](#constants-triangular_flag_on_post)
      - [Globals](#globals-earth_africa)
-    
+
  - [Semicolons](#semicolons-pencil2)
  - [Method and property definitions](#method-and-property-definitions-paperclip)
  - [Deleting properties](#deleting-properties-x)
@@ -117,6 +119,7 @@ delete foo.bar;
 ## `eval()`
 
 `eval` is evil. :rage: Do not use it. However I use it in some test files and in places where I have to execute the JavaScript code provided by the user.
+
 
 For converting strings to JSON, use `JSON.parse(strObj)`.
 
@@ -356,10 +359,12 @@ I use [`name-it`](https://github.com/IonicaBizau/name-it) to generate project na
 
 I :sparkling_heart: open-source! I prefer the MIT license.
 
-## How to contribute
+
+## :yum: How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].
 
-## License
+
+## :scroll: License
 
 [MIT][license] © [Ionică Bizău][website]
 
