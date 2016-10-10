@@ -1,6 +1,6 @@
 {
   "name": "ionicabizau-code-style",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Or how I build things.",
   "main": "lib/index.js",
   "scripts": {
