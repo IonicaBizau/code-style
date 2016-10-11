@@ -1,6 +1,6 @@
 {
   "name": "ionicabizau-code-style",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Or how I build things.",
   "main": "lib/index.js",
   "scripts": {
@@ -545,6 +545,7 @@
     "bin/",
     "app/",
     "lib/",
+    "build/",
     "dist/",
     "src/",
     "resources/",
