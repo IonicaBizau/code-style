@@ -12,7 +12,6 @@ This document contains guides that *I* defined and follow when building things.
 
 # Contents
 
-
  - [Variable declarations](#variable-declarations-pencil)
 
      - [Variables](#variables-speech_balloon)
@@ -37,9 +36,7 @@ This document contains guides that *I* defined and follow when building things.
  - [Project naming](#project-naming)
 
 ## Variable declarations :pencil:
-
 ### Variables :speech_balloon:
-
 
 Using `var` in general or `let` when they should be accesible only in specific blocks (e.g. `if`).
 
@@ -58,9 +55,7 @@ if (...) {
   /* do something with baz */
 }
 ```
-
 ### Constants :triangular_flag_on_post:
-
 
 Using `const`. The constant names are written with UPPERCASE letters. I also use `const` when including libraries using `require` and when they should not be changed. In this case, the names will not be with caps.
 
@@ -74,14 +69,11 @@ const PI = Math.PI
     , MY_CONSTANT = 42
     ;
 ```
-
 ### Globals :earth_africa:
-
 
 I define globals when there is no commonjs environment (this is actually handled by [`dist-it`](https://github.com/IonicaBizau/dist-it). When I manually define globals, I do that using `window.MyGlobal` (on the client) and `global.MyGlobal` (on the server).
 
 ## Semicolons :pencil2:
-
 
 I *use* semicolons. Almost always.
 
@@ -97,9 +89,7 @@ class Foo {
     ...
 }
 ```
-
 ## Method and property definitions :paperclip:
-
 
 I use the ES6 `class` for creating classes.
 
@@ -114,9 +104,7 @@ class Person {
     }
 }
 ```
-
 ## Deleting properties :x:
-
 
 I nullify the properties when that's fine:
 
@@ -127,15 +115,12 @@ var foo = {
 foo.bar = null;
 ```
 
-
 However, I use the `delete` keyword when I really want to delete them.
 
 ```js
 delete foo.bar;
 ```
-
 ## `eval()`
-
 
 `eval` is evil. :rage: Do not use it. However I use it in some test files and in places where I have to execute the JavaScript code provided by the user.
 
@@ -144,7 +129,6 @@ For converting strings to JSON, use `JSON.parse(strObj)`.
 
 ## Iterating objects and arrays
 
-
 For arrays, most of times, I use the `forEach` function:
 
 ```js
@@ -152,7 +136,6 @@ arr.forEach(c => {
     // do something
 });
 ```
-
 
 However, using `for` loops is fine too:
 
@@ -165,7 +148,6 @@ for (var i = 0; i < arr.length; ++i) {
 }
 ```
 
-
 For objects, I use the following style:
 
 ```js
@@ -175,7 +157,6 @@ Object.keys(obj).forEach(k => {
 });
 ```
 
-
 To simplify this, I created [`iterate-object`](https://github.com/IonicaBizau/iterate-object), which abstracts this functionality:
 
 ```js
@@ -184,9 +165,7 @@ iterateObject(obj, (value, key) => {
     // do something
 });
 ```
-
 ## Multiline strings :guitar:
-
 
 I use backticks to create multiline strings:
 
@@ -197,14 +176,11 @@ aliqua. Ut enim ad minim veniam, quis nostrud exercitation
 ullamco laboris nisi ut aliquip ex ea commodo consequat
 New line again...`;
 ```
-
 ## Modifying prototypes of built-in objects :shit:
-
 
 Just don't, unless that's the scope of the library.
 
 ## Naming things :thought_balloon:
-
 
 Using camel case notation for variables, in general. For constructors I capitalize the variable name (e.g. `EventEmitter`).
 
@@ -240,9 +216,7 @@ var obj = {
 };
 obj.methodA = function () {...};
 ```
-
 ## Curly braces :curly_loop:
-
 
 Open the curly brace at the end of the line. Always put the instructions between curly braces, even there is only one instruction.
 
@@ -254,9 +228,7 @@ if (expr) {
     instr3;
 }
 ```
-
 ## Array and Object Initializers :file_folder:
-
 
 See examples.
 
@@ -285,9 +257,7 @@ var obj1 = {
   , age: 20
 };
 ```
-
 ## Commas
-
 
 Put commas at the beginning of the line, not at the end.
 
@@ -305,9 +275,7 @@ var obj = {
   , y: 2
 };
 ```
-
 ## Blank lines
-
 
 Group the instructions inserting some blank lines where it's needed.
 
@@ -318,9 +286,7 @@ bar(x);
 foo(y);
 bar(y);
 ```
-
 ## Binary and Ternary operators
-
 
 See examples.
 
@@ -342,9 +308,7 @@ var c = another_long_condition_here
         : or_another_some_long_value
         ;
 ```
-
 ## Quotes :speech_balloon:
-
 
 Double quotes, with some exceptions when single quotes are used.
 
@@ -352,9 +316,7 @@ Double quotes, with some exceptions when single quotes are used.
 var foo = "\"Hello\", he said.";
 var jQuerySelector = "div.myClass[data-foo='bar']";
 ```
-
 ## Comments :notes:
-
 
 Put relevant comments. The comments start with uppercase letter.
 
@@ -367,7 +329,6 @@ const lib1 = require("lib1")
 // Constants
 const FOURTY_TWO = 42;
 ```
-
 
 Use JSDoc comments for functions and methods.
 
@@ -387,7 +348,6 @@ function sum (a, b) {
 };
 ```
 
-
 I use the [`blah` tool](https://github.com/IonicaBizau/blah) to generate documentation.
 
 ```sh
@@ -395,14 +355,11 @@ $ npm install -g blah
 $ blah --readme
 $ blah --docs some-file.js
 ```
-
 ## Project naming
-
 
 I use [`name-it`](https://github.com/IonicaBizau/name-it) to generate project names.
 
 ## Project licenses
-
 
 I :sparkling_heart: open-source! I prefer the MIT license.
 
