@@ -7,3 +7,10 @@ node_modules
 .DS_Store
 package-lock.json
 .bloggify/*
+*.tmp
+/build/
+**/*.bak
+/config.ini
+/secret_files/
+/docs/specific_file.txt
+/specific_file_or_directory_name
