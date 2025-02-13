@@ -1,6 +1,6 @@
 {
   "name": "ionicabizau-code-style",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Or how I build things.",
   "main": "lib/index.js",
   "scripts": {
@@ -552,6 +552,8 @@
     "menu/",
     "cli.js",
     "index.js",
+    "index.d.ts",
+    "package-lock.json",
     "bloggify.js",
     "bloggify.json",
     "bloggify/"
